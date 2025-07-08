@@ -27,8 +27,8 @@ function popupLoginWindow(oAuthUri) {
     }, 2000);
     window.addEventListener('message', (e) => {
       if (e.data.type === 'rc-login-callback') {
-        resolve(e.data.code);
         clearInterval(interval);
+        resolve(e.data.code);
       }
     });
   });
@@ -37,6 +37,7 @@ function handleLoginEvent() {
   const codeVerifier = generateCodeVerifier();
   const codeChallenge = generateCodeChallenge(codeVerifier);
   const oAuthUri = `https://platform.ringcentral.com/restapi/oauth/authorize?response_type=code&client_id=${ringcentralClientId}&redirect_uri=${ringcentralRedirectUri}&code_challenge=${codeChallenge}&code_challenge_method=S256`;
+  console.log('oAuthUri:', oAuthUri);
   popupLoginWindow(oAuthUri).then(code => {
     console.log('code:', code);
     document.querySelector("#rc-widget-adapter-frame").contentWindow.postMessage({
