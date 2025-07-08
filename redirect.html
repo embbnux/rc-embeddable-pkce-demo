@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+  // Important: the origin is used for postMessage
+  var origin = window.location.origin;
+  if (window.opener) {
+    // pass callbackUri to widget
+    window.opener.postMessage({
+      code: window.location.search.split('code=')[1],
+      type: 'rc-login-callback'
+    }, origin);
+    window.close(); // close the login popup window
+  }
+</script>
+</body>
+</html>
