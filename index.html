@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html>
 <body>
+<script>
+  // Add widget
+  const ringcentralClientId = "WmlGNJ7GLQJfrdZnimy9tD";
+  // Need to added in the RingCentral developer portal's app settings
+  const ringcentralRedirectUri = "https://embbnux.github.io/rc-embeddable-pkce-demo/redirect.html";
+  const params = new URLSearchParams();
+  params.append("clientId", ringcentralClientId);
+  params.append("redirectUri", ringcentralRedirectUri);
+  // disable default login popup
+  params.append("disableLoginPopup", "1"); // https://ringcentral.github.io/ringcentral-embeddable/docs/integration/events/#login-popup-event
+  (function() {
+    var rcs = document.createElement("script");
+    rcs.src = `https://apps.ringcentral.com/integration/ringcentral-embeddable/latest/adapter.js?${params.toString()}`;
+    var rcs0 = document.getElementsByTagName("script")[0];
+    rcs0.parentNode.insertBefore(rcs, rcs0);
+  })();
+</script>
 <script src="index.js"></script>
 </body>
 </html>
